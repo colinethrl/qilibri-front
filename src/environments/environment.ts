@@ -6,6 +6,8 @@ export const environment = {
   production: false
 };
 
+export const hashKey = "$2a$10$E3du3tbit0Ly13/ObDGPO."
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
