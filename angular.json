@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "qilibri-front"
+    }
+  },
+  "defaultProject": "qilibri-front",
+  "cli": {
+    "analytics": false
+  }
 }
