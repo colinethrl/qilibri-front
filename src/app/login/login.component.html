@@ -1,0 +1,74 @@
+<div class="title">Welcome ! Please log in or sign up</div>
+
+<mat-card>
+    <form [formGroup]="signUpForm" *ngIf="signUpForm">
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput>
+            <mat-error *ngIf="signUpForm.controls.email.errors && signUpForm.controls.email.errors.required">
+            Required field
+            </mat-error>
+            <mat-error *ngIf="signUpForm.controls.email.errors && signUpForm.controls.email.errors.error">
+                {{ signUpForm.controls.email.errors.error }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input formControlName="password" type="password" matInput>
+            <mat-error *ngIf="signUpForm.controls.password.errors && signUpForm.controls.password.errors.required">
+             Required field
+            </mat-error>
+            <mat-error *ngIf="signUpForm.controls.password.errors && signUpForm.controls.password.errors.error">
+              {{ signUpForm.controls.password.errors.error }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password Confirmation</mat-label>
+            <input formControlName="password_confirmation" type="password" matInput>
+            <mat-error *ngIf="signUpForm.controls.password_confirmation.errors && signUpForm.controls.password_confirmation.errors.required">
+                Required field
+            </mat-error>
+        </mat-form-field>
+        <mat-spinner diameter="35" *ngIf="loadingSignUp"></mat-spinner>
+        <button mat-raised-button mat-button *ngIf="!loadingSignUp" (click)="signUp()" [disabled]="signUpForm.invalid">Sign Up</button>
+        <mat-error class="mainError" *ngIf="matchingError">
+            The password and the confirmation don't match
+        </mat-error>
+        <mat-error class="mainError" *ngIf="signUpHttpError">
+            {{ signUpHttpError }}
+        </mat-error>
+      </form>
+
+</mat-card>
+
+
+<mat-card>
+    <form [formGroup]="loginForm" *ngIf="loginForm">
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput>
+            <mat-error *ngIf="loginForm.controls.email.errors && loginForm.controls.email.errors.required">
+            Required field
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls.email.errors && loginForm.controls.email.errors.error">
+                {{ loginForm.controls.email.errors.error }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input formControlName="password" type="password" matInput>
+            <mat-error *ngIf="loginForm.controls.password.errors && loginForm.controls.password.errors.required">
+             Required field
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls.password.errors && loginForm.controls.password.errors.error">
+              {{ loginForm.controls.password.errors.error }}
+            </mat-error>
+        </mat-form-field>
+        <mat-spinner diameter="35" *ngIf="loadingLogin"></mat-spinner>
+        <button mat-raised-button mat-button *ngIf="!loadingLogin" (click)="login()" [disabled]="loginForm.invalid">Log In</button>
+        <mat-error class="mainError" *ngIf="loginHttpError">
+            {{ loginHttpError }}
+        </mat-error>
+      </form>
+
+</mat-card>

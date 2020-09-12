@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as bcrypt from 'bcryptjs';
 import { hashKey } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { hashKey } from 'src/environments/environment';
 export class AuthenticationService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   public signUp(email, password) {
@@ -20,9 +22,14 @@ export class AuthenticationService {
       password: password,
       password_confirmation: password
     }
-    this.http.get('/sanctum/csrf-cookie').subscribe(() => {
-      this.http.post('/register', credentials).subscribe((session) => {
-        this.http.post('/login', credentials).subscribe()
+    return new Promise<any>((resolve, reject) => {
+      this.http.get('/sanctum/csrf-cookie').subscribe(() => {
+        this.http.post('/register', credentials).subscribe(() => {
+          resolve(true)
+          this.router.navigate(['front-home']);
+        },(error) => {
+          reject(error)
+        })
       })
     })
   }
@@ -33,8 +40,15 @@ export class AuthenticationService {
       email: email,
       password: password
     }
-    this.http.get('/sanctum/csrf-cookie').subscribe(() => {
-      this.http.post('/login', credentials).subscribe()
+    return new Promise<any>((resolve, reject) => {
+      this.http.get('/sanctum/csrf-cookie').subscribe(() => {
+        this.http.post('/login', credentials).subscribe(() => {
+          resolve(true)
+          this.router.navigate(['front-home']);
+        },(error) => {
+          reject(error)
+        })
+      })
     })
   }
 
