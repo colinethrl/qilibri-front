@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CrsfInterceptor } from './crsf.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { CrsfInterceptor } from './crsf.interceptor';
+// import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -34,11 +34,11 @@ import { HomeComponent } from './home/home.component';
     MatCardModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CrsfInterceptor,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: CrsfInterceptor,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })
