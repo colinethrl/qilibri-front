@@ -43,7 +43,10 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       this.http.get('/sanctum/csrf-cookie').subscribe(() => {
         this.http.post('/login', credentials).subscribe(() => {
-          resolve(true)
+          this.http.get('/api/user').subscribe((user)=> {
+            console.log(user)
+            resolve(true)
+          })
           this.router.navigate(['front-home']);
         },(error) => {
           reject(error)
