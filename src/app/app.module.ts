@@ -14,12 +14,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HomeComponent } from './home/home.component';
+import { OwnPostsComponent } from './home/own-posts/own-posts.component';
+import { NewsFeedComponent } from './home/news-feed/news-feed.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    OwnPostsComponent,
+    NewsFeedComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +38,13 @@ import { HomeComponent } from './home/home.component';
     MatInputModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
+    MatDatepickerModule,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CrsfInterceptor,

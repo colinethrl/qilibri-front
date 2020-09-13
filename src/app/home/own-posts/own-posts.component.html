@@ -1,0 +1,67 @@
+<div class="add-post-button" (click)="addPost()">
+    <mat-icon>add_box</mat-icon>
+    <p>Add post</p>
+</div>
+<form class="add-post-form" [formGroup]="addForm" *ngIf="addForm">
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput>
+        <mat-error *ngIf="addForm.controls.title.errors && addForm.controls.title.errors.required">
+        Required field
+        </mat-error>
+        <mat-error *ngIf="addForm.controls.title.errors && addForm.controls.title.errors.error">
+            {{ addForm.controls.title.errors.error }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Text</mat-label>
+        <textarea formControlName="body" matInput></textarea>
+        <mat-error *ngIf="addForm.controls.body.errors && addForm.controls.body.errors.required">
+        Required field
+        </mat-error>
+        <mat-error *ngIf="addForm.controls.body.errors && addForm.controls.body.errors.error">
+            {{ addForm.controls.body.errors.error }}
+        </mat-error>
+    </mat-form-field>
+    <div class="add-post">
+        <mat-spinner diameter="35" *ngIf="loadingPublish"></mat-spinner>
+
+        <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="publishNow()" [disabled]="addForm.invalid">Publish now</button>
+        <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="saveDraft()" [disabled]="addForm.invalid">Save as draft</button>
+        <div class="publish-later">
+            <mat-form-field appearance="fill"  *ngIf="!loadingPublish">
+                <mat-label>Publish at</mat-label>
+                <input formControlName="publishedAt" matInput [min]="minDate"  [matDatepicker]="publishedAt">
+                <mat-datepicker-toggle matSuffix [for]="publishedAt"></mat-datepicker-toggle>
+                <mat-datepicker #publishedAt></mat-datepicker>
+            </mat-form-field>
+            <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="publishLater()" [disabled]="addForm.invalid || !addForm.controls.publishedAt.value">
+                <mat-icon>publish</mat-icon>
+            </button>
+        </div>
+
+    </div>
+</form>
+<div *ngFor="let post of posts">
+    <mat-card [ngClass]="{'draft': !published(post)}">
+        <div class="post-header">
+            <span class="post-title">{{ post.title }}</span>
+            <span *ngIf="published(post) === 'to_be_published'" class="post-date-to-be">
+                To be published on the {{ post.publishedAt }}
+            </span>
+            <span *ngIf="published(post) === 'published'" class="post-date">
+                {{ post.publishedAt }}
+            </span>
+            <span *ngIf="!published(post)" class="post-date-draft">
+                Draft
+            </span>
+        </div>
+        <div class="post-body">
+            {{ post.body }}
+        </div>
+        <div class="actions">
+            <mat-icon>create</mat-icon>
+            <mat-icon>delete</mat-icon>
+        </div>
+    </mat-card>
+</div>

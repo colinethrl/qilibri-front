@@ -1,0 +1,15 @@
+@import '../../styles.scss';
+
+.nav {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+    color: $main_theme;
+    p {
+        cursor: pointer;
+    }
+    .selected {
+        text-decoration: underline;
+        font-weight: bold;
+    }
+}

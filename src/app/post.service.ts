@@ -17,4 +17,8 @@ export class PostService {
   public getPosts() {
     return this.http.get('api/posts')
   }
+
+  public getOwnPosts(user_id) {
+    return this.http.get('api/posts/' + user_id)
+  }
 }

@@ -9,22 +9,13 @@ import * as moment from 'moment';
 })
 export class HomeComponent implements OnInit {
 
+  tab = "own_posts";
   constructor(
     private postService: PostService
   ) { }
 
   ngOnInit(): void {
-    let post = {
-      title: "test",
-      body: "body test",
-      published_at: moment.now() / 1000
-    }
-    this.postService.getPosts().subscribe((posts) => {
-      console.log(posts)
-    })
-    // this.postService.createPost(post).subscribe((res) => {
-    //   console.log(res)
-    // })
+    
   }
 
 }

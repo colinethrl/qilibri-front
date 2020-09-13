@@ -1,1 +1,7 @@
-<p>home works!</p>
+<div class="nav">
+    <p [ngClass]="{'selected': tab === 'own_posts'}" (click)="tab = 'own_posts'">My posts</p>
+    <p [ngClass]="{'selected': tab === 'feed'}" (click)="tab = 'feed'">News feed</p>
+</div>
+
+<app-own-posts *ngIf="tab === 'own_posts'"></app-own-posts>
+<app-news-feed *ngIf="tab === 'feed'"></app-news-feed>
