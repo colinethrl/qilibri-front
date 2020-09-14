@@ -42,44 +42,29 @@ export class OwnPostsComponent implements OnInit {
 
   addPost() {
     this.addForm = new FormGroup({
-      title: new FormControl("",[Validators.required]),
+      title: new FormControl(null,[Validators.required]),
       body: new FormControl(null,[Validators.required]),
       publishedAt: new FormControl(null),
     })
   }
 
-  publishNow() {
+  publish(when) {
+    let publishedAt = null
+    if (when === 'now') {
+      publishedAt = moment.now() / 1000
+    } else if (when === 'later') {
+      publishedAt = parseInt(moment(this.addForm.controls.publishedAt.value).format("X"))
+    }
     let post = {
       title: this.addForm.controls.title.value,
       body: this.addForm.controls.body.value,
-      published_at: moment.now() / 1000
+      published_at: publishedAt
     }
     this.postService.createPost(post).subscribe(() => {
       this.getPosts()
     })
   }
 
-  saveDraft() {
-    let post = {
-      title: this.addForm.controls.title.value,
-      body: this.addForm.controls.body.value,
-      published_at: null
-    }
-    this.postService.createPost(post).subscribe(() => {
-      this.getPosts()
-    })
-  }
 
-  publishLater() {
-    console.log(this.addForm)
-    let post = {
-      title: this.addForm.controls.title.value,
-      body: this.addForm.controls.body.value,
-      publishedAt: parseInt(moment(this.addForm.controls.publishedAt.value).format("X"))
-    }
-    this.postService.createPost(post).subscribe(() => {
-      this.getPosts()
-    })
-  }
 
 }

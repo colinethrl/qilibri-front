@@ -9,7 +9,7 @@ import * as moment from 'moment';
 })
 export class HomeComponent implements OnInit {
 
-  tab = "own_posts";
+  tab = "feed";
   constructor(
     private postService: PostService
   ) { }

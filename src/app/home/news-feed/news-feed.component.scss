@@ -1,0 +1,25 @@
+@import '../../../styles.scss';
+@import '../home.component.scss';
+
+.post-header {
+    display: flex;
+    .post-header-text {
+        display: flex;
+        flex-direction: column;
+        .username {
+            font-weight: bold;
+        }
+        .post-date {
+            font-weight: lighter;
+        }
+    }
+    mat-icon {
+        font-size: 40px;
+        margin-right: 25px;
+    }
+}
+    
+.post-title {
+    font-weight: bold;
+    margin-top: 10px;
+}

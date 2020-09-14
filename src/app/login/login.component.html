@@ -3,6 +3,16 @@
 <mat-card>
     <form [formGroup]="signUpForm" *ngIf="signUpForm">
         <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput>
+            <mat-error *ngIf="signUpForm.controls.name.errors && signUpForm.controls.name.errors.required">
+            Required field
+            </mat-error>
+            <mat-error *ngIf="signUpForm.controls.name.errors && signUpForm.controls.name.errors.error">
+                {{ signUpForm.controls.name.errors.error }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
             <mat-label>Email</mat-label>
             <input formControlName="email" matInput>
             <mat-error *ngIf="signUpForm.controls.email.errors && signUpForm.controls.email.errors.required">

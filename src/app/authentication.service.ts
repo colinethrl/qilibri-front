@@ -14,11 +14,11 @@ export class AuthenticationService {
     private router: Router
   ) { }
 
-  public signUp(email, password) {
+  public signUp(email, name, password) {
     password = bcrypt.hashSync(password, hashKey);
     let credentials = {
       email: email,
-      name: email,
+      name: name,
       password: password,
       password_confirmation: password
     }

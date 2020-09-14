@@ -26,8 +26,8 @@
     <div class="add-post">
         <mat-spinner diameter="35" *ngIf="loadingPublish"></mat-spinner>
 
-        <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="publishNow()" [disabled]="addForm.invalid">Publish now</button>
-        <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="saveDraft()" [disabled]="addForm.invalid">Save as draft</button>
+        <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="publish('now')" [disabled]="addForm.invalid">Publish now</button>
+        <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="publish('draft')" [disabled]="addForm.invalid">Save as draft</button>
         <div class="publish-later">
             <mat-form-field appearance="fill"  *ngIf="!loadingPublish">
                 <mat-label>Publish at</mat-label>
@@ -35,7 +35,7 @@
                 <mat-datepicker-toggle matSuffix [for]="publishedAt"></mat-datepicker-toggle>
                 <mat-datepicker #publishedAt></mat-datepicker>
             </mat-form-field>
-            <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="publishLater()" [disabled]="addForm.invalid || !addForm.controls.publishedAt.value">
+            <button mat-raised-button mat-button *ngIf="!loadingPublish" (click)="publish('later')" [disabled]="addForm.invalid || !addForm.controls.publishedAt.value">
                 <mat-icon>publish</mat-icon>
             </button>
         </div>

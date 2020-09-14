@@ -1,1 +1,35 @@
-<p>news-feed works!</p>
+<form [formGroup]="form" class="example-form" *ngIf="users">
+    <mat-form-field>
+      <input type="text"
+             placeholder="Search by user..."
+             matInput
+             formControlName="username"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let user of users" [value]="user.name">
+          {{ user.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+
+<div *ngFor="let post of filteredPosts">
+    <mat-card>
+        <div class="post-header">
+            <mat-icon>account_circle</mat-icon>
+            <div class="post-header-text">
+                <span class="username">{{ post.user.name }}</span>
+                <span class="post-date">
+                    {{ post.publishedAt }}
+                </span>
+            </div>
+        </div>
+        <div class="post-title">
+            {{ post.title }}
+        </div>
+        <div class="post-body">
+            {{ post.body }}
+        </div>
+    </mat-card>
+</div>
