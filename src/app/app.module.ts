@@ -5,7 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CrsfInterceptor } from './crsf.interceptor';
+// import { CrsfInterceptor } from './crsf.interceptor';
+import { AuthInterceptor } from './auth.interceptor';
+
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,7 +51,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatDatepickerModule,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: CrsfInterceptor,
+    useClass: AuthInterceptor,
       multi: true
     }
   ],

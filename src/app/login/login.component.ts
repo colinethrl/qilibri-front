@@ -50,9 +50,8 @@ export class LoginComponent implements OnInit {
         this.loadingSignUp = false
         this.signUpHttpError = ""
       }, error => {
-        let errorMessage = error.error.errors
-        this.signUpHttpError = errorMessage[Object.keys(errorMessage)[0]][0]
         this.loadingSignUp = false
+        this.signUpHttpError = error
       })
     }
   }
@@ -66,9 +65,8 @@ export class LoginComponent implements OnInit {
       this.loadingLogin = false
       this.loginHttpError = ""
     }, error => {
-      let errorMessage = error.error.errors
-      this.loginHttpError = errorMessage[Object.keys(errorMessage)[0]][0]
       this.loadingLogin = false
+      this.loginHttpError = error
     })
   }
 

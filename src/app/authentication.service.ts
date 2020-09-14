@@ -20,17 +20,13 @@ export class AuthenticationService {
       email: email,
       name: name,
       password: password,
-      password_confirmation: password
     }
     return new Promise<any>((resolve, reject) => {
-      this.http.get('/sanctum/csrf-cookie').subscribe(() => {
-        this.http.post('/register', credentials).subscribe(() => {
-          resolve(true)
-          this.router.navigate(['front-home']);
-        },(error) => {
-          reject(error)
-        })
-      })
+      this.http.post('api/sign-up', credentials).subscribe((user: any)=> {
+        localStorage.setItem('user', JSON.stringify(user))
+        resolve(true)
+        this.router.navigate(['front-home']);
+      }, err => reject(err.error))
     })
   }
 
@@ -41,21 +37,17 @@ export class AuthenticationService {
       password: password
     }
     return new Promise<any>((resolve, reject) => {
-      this.http.get('/sanctum/csrf-cookie').subscribe(() => {
-        this.http.post('/login', credentials).subscribe(() => {
-          this.http.get('/api/user').subscribe((user)=> {
-            console.log(user)
-            resolve(true)
-          })
-          this.router.navigate(['front-home']);
-        },(error) => {
-          reject(error)
-        })
+      this.http.post('api/login', credentials).subscribe((user: any)=> {
+        localStorage.setItem('user', JSON.stringify(user))
+        resolve(true)
+        this.router.navigate(['front-home']);
+      }, err => {
+        reject(err.error)
       })
     })
   }
 
   public logout() {
-    this.http.post('/logout', {}).subscribe()
+    localStorage.setItem('user', null)
   }
 }
