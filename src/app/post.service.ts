@@ -11,15 +11,17 @@ export class PostService {
   ) { }
 
   public createPost(post) {
-    return this.http.post('/api/post', post)
+    let user = JSON.parse(localStorage.getItem('user'))
+    return this.http.post('/api/post/' + user.id, post)
   }
 
   public getPosts() {
     return this.http.get('api/posts')
   }
 
-  public getOwnPosts(user_id) {
-    return this.http.get('api/posts/' + user_id)
+  public getOwnPosts() {
+    let user = JSON.parse(localStorage.getItem('user'))
+    return this.http.get('api/posts/' + user.id)
   }
 
   public getUsers() {

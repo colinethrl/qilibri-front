@@ -1,35 +1,68 @@
 <form [formGroup]="form" class="example-form" *ngIf="users">
-    <mat-form-field>
-      <input type="text"
-             placeholder="Search by user..."
-             matInput
-             formControlName="username"
-             [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let user of users" [value]="user.name">
-          {{ user.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
+  <mat-form-field>
+    <input type="text"
+            placeholder="Search by user..."
+            matInput
+            formControlName="username"
+            [matAutocomplete]="autoUsers">
+    <mat-autocomplete autoActiveFirstOption #autoUsers="matAutocomplete" [displayWith]="displayFnUser">
+      <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+        {{ user.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text"
+            placeholder="Search by title..."
+            matInput
+            formControlName="title"
+            [matAutocomplete]="autoTitles">
+    <mat-autocomplete autoActiveFirstOption #autoTitles="matAutocomplete" [displayWith]="displayFnPost">
+      <mat-option *ngFor="let post of filteredTitlePosts | async" [value]="post">
+        {{ post.title }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
 
 
-<div *ngFor="let post of filteredPosts">
-    <mat-card>
-        <div class="post-header">
-            <mat-icon>account_circle</mat-icon>
-            <div class="post-header-text">
-                <span class="username">{{ post.user.name }}</span>
-                <span class="post-date">
-                    {{ post.publishedAt }}
-                </span>
-            </div>
+<div *ngIf="selectedPost">
+  <mat-card>
+    <div class="post-header">
+        <mat-icon>account_circle</mat-icon>
+        <div class="post-header-text">
+            <span class="username">{{ selectedPost.user.name }}</span>
+            <span class="post-date">
+                {{ selectedPost.publishedAt }}
+            </span>
         </div>
-        <div class="post-title">
-            {{ post.title }}
-        </div>
-        <div class="post-body">
-            {{ post.body }}
-        </div>
-    </mat-card>
+    </div>
+    <div class="post-title">
+        {{ selectedPost.title }}
+    </div>
+    <div class="post-body">
+        {{ selectedPost.body }}
+    </div>
+</mat-card>
+</div>
+<div *ngIf="!selectedPost">
+  <div *ngFor="let post of filteredPosts">
+      <mat-card>
+          <div class="post-header">
+              <mat-icon>account_circle</mat-icon>
+              <div class="post-header-text">
+                  <span class="username">{{ post.user.name }}</span>
+                  <span class="post-date">
+                      {{ post.publishedAt }}
+                  </span>
+              </div>
+          </div>
+          <div class="post-title">
+              {{ post.title }}
+          </div>
+          <div class="post-body">
+              {{ post.body }}
+          </div>
+      </mat-card>
+  </div>
 </div>

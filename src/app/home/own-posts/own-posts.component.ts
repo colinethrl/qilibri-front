@@ -25,7 +25,7 @@ export class OwnPostsComponent implements OnInit {
   }
 
   getPosts() {
-    this.postService.getOwnPosts(3).subscribe((postsFromApi: any) => {
+    this.postService.getOwnPosts().subscribe((postsFromApi: any) => {
       this.posts = postsFromApi.map((postFromApi : any) => Post.apiToModel(postFromApi))
     })
   }

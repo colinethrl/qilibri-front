@@ -1,0 +1,17 @@
+@import '../styles.scss';
+
+.header {
+    font-family: Grandstander;
+    height: 80px;
+    font-size: 50px;
+    background: $main_theme;
+    color: white;
+    display: flex;
+    line-height: 2;
+    img {
+        height: 80px;
+    }
+    p {
+        margin-left: 15px;
+    }
+}
