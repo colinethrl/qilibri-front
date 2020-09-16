@@ -31,8 +31,6 @@ export class AppComponent implements OnInit {
     this.authenticated = event.componentName !== "login"
   }
 
-
-
   logout() {
     this.authenticationService.logout()
     this.router.navigate(['front-login']);

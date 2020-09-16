@@ -1,0 +1,18 @@
+<mat-card>
+    <div class="post-header">
+        <mat-icon>account_circle</mat-icon>
+        <div class="post-header-text">
+            <span *ngIf="userId === post.user.id" class="username">You</span>
+            <span *ngIf="userId !== post.user.id" class="username">{{ post.user.name }}</span>
+            <span class="post-date">
+                {{ post.publishedAtString }}
+            </span>
+        </div>
+    </div>
+    <div class="post-title">
+        {{ post.title }}
+    </div>
+    <div class="post-body">
+        {{ post.body }}
+    </div>
+</mat-card>

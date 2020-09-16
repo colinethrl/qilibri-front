@@ -4,7 +4,7 @@ import { Post } from 'src/app/post';
 import * as moment from 'moment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'src/app/message.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-own-posts',
@@ -20,12 +20,12 @@ export class OwnPostsComponent implements OnInit {
   ) { }
 
   posts: Array<Post>;
-  addForm: FormGroup;
-  minDate = new Date();
-  loadingPublish = false;
-  loading = true;
   editedPost: Post;
+  minDate = new Date();
+  addForm: FormGroup;
   editForm: FormGroup;
+  loading = true;
+  loadingPublish = false;
   loadingEdit = false;
 
   ngOnInit(): void {
@@ -34,11 +34,11 @@ export class OwnPostsComponent implements OnInit {
 
   getPosts() {
     this.postService.getOwnPosts().subscribe((postsFromApi: any) => {
-      this.loading = false
       this.posts = postsFromApi.map((postFromApi : any) => Post.apiToModel(postFromApi))
+      this.loading = false
     }, err => {
       this.loading = false
-      this.messageService.message("An problem occured, please check your connexion and try again", "error")
+      this.messageService.message("A problem occured, please check your connexion and try again", "error")
     })
   }
 
@@ -80,7 +80,7 @@ export class OwnPostsComponent implements OnInit {
       this.messageService.message("Post created successfully !", "success")
     }, err => {
       this.loadingPublish = false
-      this.messageService.message("An problem occured, please check your connexion and try again", "error")
+      this.messageService.message("A problem occured, please check your connexion and try again", "error")
     })
   }
 
@@ -116,7 +116,7 @@ export class OwnPostsComponent implements OnInit {
       this.messageService.message("Post edited successfully !", "success")
     }, err => {
       this.loadingEdit = false
-      this.messageService.message("An problem occured, please check your connexion and try again", "error")
+      this.messageService.message("A problem occured, please check your connexion and try again", "error")
     })
   }
 
@@ -132,7 +132,7 @@ export class OwnPostsComponent implements OnInit {
           this.getPosts()
         }, err => {
           this.loading = false
-          this.messageService.message("An problem occured, please check your connexion and try again", "error")
+          this.messageService.message("A problem occured, please check your connexion and try again", "error")
         })
       }
     });
@@ -142,7 +142,4 @@ export class OwnPostsComponent implements OnInit {
     this.editForm = null
     this.editedPost = null
   }
-
-
-
 }

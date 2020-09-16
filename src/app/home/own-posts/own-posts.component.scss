@@ -34,23 +34,23 @@
         z-index: 10;
         cursor: pointer;
     }
+    .add-post, .edit-post {
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        button {
+            margin: 0;
+        }
+        .publish-later {
+            display: flex;
+        }
+    }
 }
 
 .add-post-form {
     width: 60%;
 }
 
-.add-post, .edit-post {
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-    button {
-        margin: 0;
-    }
-    .publish-later {
-        display: flex;
-    }
-}
 
 mat-card {
     &.draft {

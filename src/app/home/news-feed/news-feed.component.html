@@ -29,46 +29,12 @@
 
 
 <div *ngIf="selectedPost && !loading">
-  <mat-card>
-    <div class="post-header">
-        <mat-icon>account_circle</mat-icon>
-        <div class="post-header-text">
-            <span *ngIf="userId === selectedPost.user.id" class="username">You</span>
-            <span *ngIf="userId !== selectedPost.user.id" class="username">{{ selectedPost.user.name }}</span>
-            <span class="post-date">
-                {{ selectedPost.publishedAtString }}
-            </span>
-        </div>
-    </div>
-    <div class="post-title">
-        {{ selectedPost.title }}
-    </div>
-    <div class="post-body">
-        {{ selectedPost.body }}
-    </div>
-</mat-card>
+  <app-post-card [post]="selectedPost"></app-post-card>
 </div>
 <div class="content-spinner" *ngIf="loading"><mat-spinner></mat-spinner></div>
 
 <div *ngIf="!selectedPost && !loading">
   <div *ngFor="let post of filteredPosts">
-      <mat-card>
-          <div class="post-header">
-              <mat-icon>account_circle</mat-icon>
-              <div class="post-header-text">
-                <span *ngIf="userId === post.user.id" class="username">You</span>
-                <span *ngIf="userId !== post.user.id" class="username">{{ post.user.name }}</span>
-                <span class="post-date">
-                    {{ post.publishedAtString }}
-                </span>
-              </div>
-          </div>
-          <div class="post-title">
-              {{ post.title }}
-          </div>
-          <div class="post-body">
-              {{ post.body }}
-          </div>
-      </mat-card>
+    <app-post-card [post]="post"></app-post-card>
   </div>
 </div>

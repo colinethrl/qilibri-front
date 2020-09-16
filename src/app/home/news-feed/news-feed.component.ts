@@ -21,11 +21,11 @@ export class NewsFeedComponent implements OnInit {
 
   posts: Array<Post>;
   filteredPosts: Array<Post>;
+  filteredTitlePosts: Observable<Post[]>;
   users: Array<User>
   filteredUsers: Observable<User[]>;
   form: FormGroup;
   selectedPost: Post;
-  filteredTitlePosts: Observable<Post[]>;
   loading = true;
   userId: number;
 
@@ -44,7 +44,7 @@ export class NewsFeedComponent implements OnInit {
       this.handleTitleChange()
     }, err => {
       this.loading = false
-      this.messageService.message("An problem occured, please check your connexion and try again", "error")
+      this.messageService.message("A problem occured, please check your connexion and try again", "error")
     })
   }
   handleUsernameChange() {
@@ -86,7 +86,7 @@ export class NewsFeedComponent implements OnInit {
     this.postService.getUsers().subscribe((usersFromApi: any) => {
       this.users = usersFromApi.map((userFromApi) => User.apiToModel(userFromApi))
     }, err => {
-      this.messageService.message("An problem occured, please check your connexion and try again", "error")
+      this.messageService.message("A problem occured, please check your connexion and try again", "error")
     })
   }
 

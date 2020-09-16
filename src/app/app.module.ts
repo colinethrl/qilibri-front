@@ -24,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PostCardComponent } from './home/news-feed/post-card/post-card.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     HomeComponent,
     OwnPostsComponent,
-    NewsFeedComponent
+    NewsFeedComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,
