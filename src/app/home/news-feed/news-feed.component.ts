@@ -27,8 +27,10 @@ export class NewsFeedComponent implements OnInit {
   selectedPost: Post;
   filteredTitlePosts: Observable<Post[]>;
   loading = true;
+  userId: number;
 
   ngOnInit(): void {
+    this.userId = JSON.parse(localStorage.getItem('user')).id
     this.postService.getPosts().subscribe((postsFromApi: any) => {
       this.posts = postsFromApi.map((postFromApi : any) => Post.apiToModel(postFromApi))
       this.filteredPosts = this.posts

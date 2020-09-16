@@ -33,7 +33,8 @@
     <div class="post-header">
         <mat-icon>account_circle</mat-icon>
         <div class="post-header-text">
-            <span class="username">{{ selectedPost.user.name }}</span>
+            <span *ngIf="userId === selectedPost.user.id" class="username">You</span>
+            <span *ngIf="userId !== selectedPost.user.id" class="username">{{ selectedPost.user.name }}</span>
             <span class="post-date">
                 {{ selectedPost.publishedAtString }}
             </span>
@@ -55,10 +56,11 @@
           <div class="post-header">
               <mat-icon>account_circle</mat-icon>
               <div class="post-header-text">
-                  <span class="username">{{ post.user.name }}</span>
-                  <span class="post-date">
-                      {{ post.publishedAtString }}
-                  </span>
+                <span *ngIf="userId === post.user.id" class="username">You</span>
+                <span *ngIf="userId !== post.user.id" class="username">{{ post.user.name }}</span>
+                <span class="post-date">
+                    {{ post.publishedAtString }}
+                </span>
               </div>
           </div>
           <div class="post-title">
