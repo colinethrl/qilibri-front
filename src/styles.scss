@@ -43,3 +43,15 @@ simple-snack-bar.mat-simple-snackbar {
 .mat-progress-spinner circle, .mat-spinner circle {
     stroke: $main_theme;
 }
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: $main_theme !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    background-color: $main_theme !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+    background-color: $main_theme !important;;
+}
