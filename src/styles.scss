@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 $main_theme: #18421f;
 $second_theme: #3aa15a;
+$danger: #FF4848;
 
 
 html, body { height: 100%; }
@@ -15,4 +16,30 @@ button.mat-button {
     color: white;
     background: $second_theme;
     margin-top: 10px;
+}
+
+simple-snack-bar.mat-simple-snackbar {
+    justify-content: center;
+}
+.green-snackbar {
+    background-color: $second_theme;
+    color: white;
+}
+
+.red-snackbar {
+    background-color: $danger;
+    color: white;
+}
+
+.button-spinner, .content-spinner {
+    display: flex;
+    justify-content: center;
+}
+
+.content-spinner {
+    margin-top: 20px;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: $main_theme;
 }

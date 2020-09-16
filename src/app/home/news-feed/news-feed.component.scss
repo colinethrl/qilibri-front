@@ -29,3 +29,9 @@ form {
     justify-content: space-evenly;
     margin-top: 20px;
 }
+
+::ng-deep .mat-form-field-prefix {
+    align-self: flex-end;
+    color: #777;
+    margin-right: 5px;
+}

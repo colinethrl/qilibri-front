@@ -5,6 +5,7 @@ import { User } from 'src/app/user';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-news-feed',
@@ -14,7 +15,8 @@ import {map, startWith} from 'rxjs/operators';
 export class NewsFeedComponent implements OnInit {
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private messageService: MessageService
   ) { }
 
   posts: Array<Post>;
@@ -24,11 +26,13 @@ export class NewsFeedComponent implements OnInit {
   form: FormGroup;
   selectedPost: Post;
   filteredTitlePosts: Observable<Post[]>;
+  loading = true;
 
   ngOnInit(): void {
     this.postService.getPosts().subscribe((postsFromApi: any) => {
       this.posts = postsFromApi.map((postFromApi : any) => Post.apiToModel(postFromApi))
       this.filteredPosts = this.posts
+      this.loading = false
       this.getUsers()
       this.form = new FormGroup({
         title: new FormControl(null),
@@ -36,6 +40,9 @@ export class NewsFeedComponent implements OnInit {
       })
       this.handleUsernameChange()
       this.handleTitleChange()
+    }, err => {
+      this.loading = false
+      this.messageService.message("An problem occured, please check your connexion and try again", "error")
     })
   }
   handleUsernameChange() {
@@ -47,40 +54,37 @@ export class NewsFeedComponent implements OnInit {
         );
   
     this.form.controls.username.valueChanges.subscribe((selectedUser) => {
-      if (selectedUser) {
-        this.filteredPosts = this.posts.filter((post) => post.user.id === selectedUser.id)
-      } else {
-        this.filteredPosts = this.posts
-      }
-      this.filteredTitlePosts = this.form.controls.title.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.title),
-        map(title => title ? this._filterTitles(title) : this.filteredPosts.slice())
-      );
+      this.filteredPosts = selectedUser ?
+        this.posts.filter((post) => post.user.id === selectedUser.id) :
+        this.posts
+
+      this.form.controls.title.setValue(null)
+
+      this.bindTitlePosts()
     })
   }
 
   handleTitleChange() {
+    this.bindTitlePosts()
+    this.form.controls.title.valueChanges.subscribe((selectedPost) => {
+      this.selectedPost = typeof selectedPost != String ? selectedPost : null
+    })
+  }
+
+  bindTitlePosts() {
     this.filteredTitlePosts = this.form.controls.title.valueChanges
     .pipe(
       startWith(''),
       map(value => typeof value === 'string' ? value : value.title),
       map(title => title ? this._filterTitles(title) : this.filteredPosts.slice())
     );
-
-    this.form.controls.title.valueChanges.subscribe((selectedPost) => {
-      if (typeof selectedPost != String) {
-        this.selectedPost = selectedPost
-      } else {
-        this.selectedPost = null
-      }
-    })
   }
 
   getUsers() {
     this.postService.getUsers().subscribe((usersFromApi: any) => {
       this.users = usersFromApi.map((userFromApi) => User.apiToModel(userFromApi))
+    }, err => {
+      this.messageService.message("An problem occured, please check your connexion and try again", "error")
     })
   }
 
