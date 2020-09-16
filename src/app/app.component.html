@@ -1,7 +1,8 @@
 <div class="header">
     <img src="/assets/logo.jpeg" />
     <p>Test Qilibri</p>
+    <mat-icon *ngIf="authenticated" (click)="logout()">exit_to_app</mat-icon>
 </div>
 <div class="container">
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="componentAdded($event)"></router-outlet>
 </div>

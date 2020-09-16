@@ -10,6 +10,7 @@ import * as moment from 'moment';
 export class HomeComponent implements OnInit {
 
   tab = "own_posts";
+  componentName = "home"
   constructor(
     private postService: PostService
   ) { }

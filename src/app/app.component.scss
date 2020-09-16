@@ -14,4 +14,11 @@
     p {
         margin-left: 15px;
     }
+    mat-icon {
+        position: absolute;
+        right: 30px;
+        font-size: 40px;
+        line-height: inherit;
+        cursor: pointer;
+    }
 }

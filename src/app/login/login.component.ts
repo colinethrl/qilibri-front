@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   matchingError = false;
   signUpHttpError = ""
   loginHttpError = ""
+  componentName = "login"
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -36,7 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   signUp() {
-    this.authService.logout()
     let email = this.signUpForm.controls.email.value
     let password = this.signUpForm.controls.password.value
     let passwordConfirmation = this.signUpForm.controls.password_confirmation.value
@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.logout()
     let email = this.loginForm.controls.email.value
     let password = this.loginForm.controls.password.value
     this.loadingLogin = true
