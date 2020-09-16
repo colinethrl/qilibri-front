@@ -15,6 +15,16 @@ export class PostService {
     return this.http.post('/api/post/' + user.id, post)
   }
 
+  public editPost(post) {
+    let user = JSON.parse(localStorage.getItem('user'))
+    return this.http.post('/api/post/' + post.id + "/" + user.id, post)
+  }
+
+  public deletePost(post) {
+    let user = JSON.parse(localStorage.getItem('user'))
+    return this.http.delete('/api/post/' + post.id + "/" + user.id, post)
+  }
+
   public getPosts() {
     return this.http.get('api/posts')
   }

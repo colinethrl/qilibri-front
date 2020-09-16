@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [
     MatDatepickerModule,

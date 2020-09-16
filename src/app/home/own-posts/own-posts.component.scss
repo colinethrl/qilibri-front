@@ -2,7 +2,7 @@
 @import '../home.component.scss';
 
 
-.add-post-button {
+.add-post-button, .edit-post-button {
     width: 20%;
     margin-left: auto;
     margin-right: auto;
@@ -23,14 +23,24 @@
     }
 }
 
-.add-post-form {
+.add-post-form, .edit-post-form {
     display: flex;
     flex-direction: column;
-    width: 60%;
     margin: auto;
+    .icon-close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 10;
+        cursor: pointer;
+    }
 }
 
-.add-post {
+.add-post-form {
+    width: 60%;
+}
+
+.add-post, .edit-post {
     display: flex;
     justify-content: space-between;
     height: 50px;
@@ -65,5 +75,13 @@ mat-card {
         mat-icon {
             cursor: pointer;
         }
+    }
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: space-evenly;
+    .cancel {
+        background-color: $danger;
     }
 }
