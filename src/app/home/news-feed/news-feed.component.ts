@@ -69,7 +69,7 @@ export class NewsFeedComponent implements OnInit {
   handleTitleChange() {
     this.bindTitlePosts()
     this.form.controls.title.valueChanges.subscribe((selectedPost) => {
-      this.selectedPost = typeof selectedPost != String ? selectedPost : null
+      this.selectedPost = typeof selectedPost != 'string' ? selectedPost : null
     })
   }
 
@@ -77,7 +77,7 @@ export class NewsFeedComponent implements OnInit {
     this.filteredTitlePosts = this.form.controls.title.valueChanges
     .pipe(
       startWith(''),
-      map(value => typeof value === 'string' ? value : value.title),
+      map(value => typeof value === 'string' || !value ? value : value.title),
       map(title => title ? this._filterTitles(title) : this.filteredPosts.slice())
     );
   }

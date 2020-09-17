@@ -11,5 +11,6 @@ export class PostCardComponent {
   constructor() { }
 
   @Input() post: Post;
+  @Input() userId: number;
 
 }

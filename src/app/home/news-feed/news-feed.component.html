@@ -9,6 +9,7 @@
     <mat-autocomplete autoActiveFirstOption #autoUsers="matAutocomplete" [displayWith]="displayFnUser">
       <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
         {{ user.name }}
+        <span *ngIf="userId === user.id"> (You)</span>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
@@ -29,12 +30,12 @@
 
 
 <div *ngIf="selectedPost && !loading">
-  <app-post-card [post]="selectedPost"></app-post-card>
+  <app-post-card [post]="selectedPost" [userId]="userId"></app-post-card>
 </div>
 <div class="content-spinner" *ngIf="loading"><mat-spinner></mat-spinner></div>
 
 <div *ngIf="!selectedPost && !loading">
   <div *ngFor="let post of filteredPosts">
-    <app-post-card [post]="post"></app-post-card>
+    <app-post-card [post]="post" [userId]="userId"></app-post-card>
   </div>
 </div>
